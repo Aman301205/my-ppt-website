@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Movie Recommendation System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs-cloudflare-com.b-cdn.net/ajax/libs/reveal.js/4.5.0/theme/black.min.css" id="theme">
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* --- CINEMATIC VISUAL DESIGN THEME --- */
+        :root {
+            --gold-accent: #D4AF37;
+            --cinematic-blue: #0A1A2F;
+            --deep-black: #000000;
+            --soft-white: #F1F1F1;
+            --overlay-color: rgba(10, 26, 47, 0.88);
+        }
+
+        body { background-color: var(--deep-black); }
+
+        .reveal {
+            font-family: 'Bebas Neue', sans-serif;
+            color: var(--soft-white);
+        }
+
+        /* Typography & Style (Titles: Bold/Cinematic) */
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+            font-family: 'Bebas Neue', sans-serif;
+            text-transform: uppercase;
+            color: var(--gold-accent);
+            text-shadow: 0px 4px 10px rgba(0,0,0,0.8);
+            margin-bottom: 30px;
+        }
+        
+        .reveal h1 { font-weight: 900; letter-spacing: 5px; font-size: 3em; }
+        .reveal h2 { font-weight: 700; letter-spacing: 2px; font-size: 2.2em; border-bottom: 2px solid var(--gold-accent); display: inline-block; padding-bottom: 10px; }
+        
+        /* APPLYING MV BOLI, ITALICS, AND BOLD TO BULLET POINTS & GENERAL TEXT */
+        .reveal p, .reveal ul li, .reveal aside.notes, .reveal .submission-text {
+            font-family: 'MV Boli', 'Comic Sans MS', cursive;
+            font-style: italic; 
+            font-weight: bold; 
+        }
+
+        /* Layout & Cards (Ensuring readability at 100% zoom) */
+        .cinematic-card {
+            background: var(--overlay-color);
+            padding: 40px;
+            border-radius: 8px;
+            border-left: 5px solid var(--gold-accent);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+            text-align: left;
+            max-width: 90%;
+            margin: 0 auto;
+            /* Hover Animation */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .cinematic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .center-text { text-align: center; }
+
+        /* Bullets */
+        .reveal ul { margin-left: 20px; list-style: none; }
+        .reveal ul li {
+            font-size: 1.25em; /* INCREASED SIZE */
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            display: flex;
+            align-items: center;
+        }
+        .reveal ul li::before {
+            content: "✦";
+            color: var(--gold-accent);
+            margin-right: 15px;
+            font-size: 0.8em;
+        }
+
+        /* Sub-text and P-tags in the main slide */
+        .reveal p {
+            font-size: 1.1em; /* INCREASED SIZE */
+        }
+        
+        /* Speaker Notes Size */
+        .reveal aside.notes {
+            font-size: 1.1em; /* INCREASED SIZE */
+        }
+        
+        /* Architecture Flow Diagram Styling */
+        .flow-chart { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; font-family: 'Montserrat'; }
+        .flow-box {
+            background: transparent;
+            border: 2px solid var(--gold-accent);
+            color: var(--soft-white);
+            padding: 15px;
+            font-size: 0.8em; /* Adjusted size for clarity within the chart */
+            border-radius: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-style: normal; /* Override italic/bold for structure elements */
+        }
+        .flow-arrow { font-size: 1.8em; color: var(--gold-accent); }
+
+        /* Style for Submission Details on Slide 1 */
+        .submission-text {
+            color: var(--gold-accent);
+            font-family: 'MV Boli', 'Comic Sans MS', cursive;
+            font-style: italic; 
+            font-weight: bold; 
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            line-height: 1.5; /* Spacing for names */
+        }
+        .submission-container {
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 2px solid var(--gold-accent);
+            background: rgba(0,0,0,0.5);
+            border-radius: 5px;
+        }
+        .group-member {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin: 0 auto;
+        }
+        .guide-name {
+            margin-top: 20px;
+            font-size: 1.4em;
+        }
+        .institute-name {
+            margin-top: 30px;
+            font-size: 1.6em;
+            letter-spacing: 1px;
+            color: var(--soft-white); /* Use soft white for the institute name */
+            border-top: 1px solid rgba(212, 175, 55, 0.5);
+            padding-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="reveal">
+    <div class="slides">
+
+        <section data-background-image="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1920&auto=format&fit=crop" data-background-opacity="0.9" data-transition="zoom">
+            <div class="cinematic-card center-text" style="border: none; background: rgba(0,0,0,0.7);">
+                
+                <h2 class="fragment fade-in" data-fragment-index="1" style="color: var(--soft-white); border: none;">MINI PROJECT</h2>
+                <hr style="border-color: #D4AF37; width: 40%; margin: 15px auto;" class="fragment fade-in" data-fragment-index="2">
+                
+                <h1 class="fragment fade-in" data-fragment-index="3" style="font-size: 3.5em;">Movie Recommendation System</h1>
+                
+                <div class="submission-container">
+                    <p class="submission-text fragment fade-in" data-fragment-index="4" style="text-align: center; margin-bottom: 10px;">Submitted by:</p>
+                    
+                    <div style="display: flex; justify-content: space-around; width: 100%; margin: 0 auto;">
+                        <div style="text-align: left; margin-right: 30px;">
+                            <p class="submission-text fragment fade-in" data-fragment-index="5">ROHIT KUMAR</p>
+                            <p class="submission-text fragment fade-in" data-fragment-index="6">AMAN KUMAR</p>
+                            <p class="submission-text fragment fade-in" data-fragment-index="7">ANKITA YADAV</p>
+                            <p class="submission-text fragment fade-in" data-fragment-index="8">PRIYANSHU PARASHAR</p>
+                        </div>
+                        <div style="text-align: left;">
+                            <p class="submission-text fragment fade-in" data-fragment-index="5">[ B.TECH CSE 2nd YEAR]</p>
+                            <p class="submission-text fragment fade-in" data-fragment-index="6">[ B.TECH CSE 2nd YEAR]</p>
+                            <p class="submission-text fragment fade-in" data-fragment-index="7">[ B.TECH CSE 2nd YEAR]</p>
+                            <p class="submission-text fragment fade-in" data-fragment-index="8">[ B.TECH CSE 2nd YEAR]</p>
+                        </div>
+                    </div>
+
+                    <p class="submission-text guide-name fragment fade-in" data-fragment-index="9" style="margin-top: 30px;">Guide: **MS. PALLAVI**</p>
+
+                    <p class="submission-text institute-name fragment fade-in" data-fragment-index="10">
+                        ACCURATE INSTITUTE OF MANAGEMENT AND TECHNOLOGY
+                    </p>
+                </div>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - (Silence for 3-5 seconds to let the audience absorb the visual and project details).
+                - "Welcome. Today, we, the CSE 2nd Year team, guided by Ms. Pallavi, present our Mini Project: The Movie Recommendation System."
+            </aside>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1920&auto=format&fit=crop" data-transition="zoom">
+            <div class="cinematic-card center-text" style="border: none; background: rgba(0,0,0,0.6);">
+                <h1 class="fragment fade-in">Movie Recommendation System</h1>
+                <hr style="border-color: #D4AF37; width: 60%; margin: 20px auto;" class="fragment fade-in">
+                <h3 class="fragment fade-in">Using Machine Learning</h3>
+                <p style="opacity: 0.8; margin-top: 30px;" class="fragment fade-in">A Smart Cinematic Discovery Experience</p>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - Introduce the project title: Movie Recommendation System using Machine Learning.
+                - Tagline: A Smart Cinematic Discovery Experience.
+                - We are bridging the gap between user intent and vast content libraries.
+            </aside>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1516259771146-5b77c5770517?q=80&w=1920&auto=format&fit=crop" data-transition="slide">
+            <div class="cinematic-card">
+                <h2>Introduction</h2>
+                <ul>
+                    <li class="fragment fade-in"><i class="fas fa-filter"></i> **Concept:** Algorithms filtering data to predict user preference</li>
+                    <li class="fragment fade-in"><i class="fas fa-rocket"></i> **Significance:** Essential for navigating modern digital libraries</li>
+                    <li class="fragment fade-in"><i class="fas fa-tv"></i> **Relevance:** The backbone of Netflix, Prime, and Spotify</li>
+                </ul>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - What is a recommendation system? It's an information filtering system.
+                - In an era of information overload, these systems are the backbone of digital platforms.
+                - It is no longer a luxury; it is a necessity for keeping the user engaged.
+            </aside>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?q=80&w=1920&auto=format&fit=crop" data-transition="convex">
+            <div class="cinematic-card">
+                <h2>The Need</h2>
+                <ul>
+                    <li class="fragment fade-in"><i class="fas fa-search-minus"></i> Users struggle to find the "**Right Movie**" quickly</li>
+                    <li class="fragment fade-in"><i class="fas fa-database"></i> Severe **content overload** on OTT platforms</li>
+                    <li class="fragment fade-in"><i class="fas fa-user-check"></i> **Personalization** directly correlates to User Retention</li>
+                </ul>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - We've all been there: scrolling for 30 minutes just to pick a 90-minute movie (**Content Overload**).
+                - Our app solves this analysis paralysis by filtering noise.
+                - The goal is to maximize watch time, not search time.
+            </aside>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1508921912186-1d1a45db9284?q=80&w=1920&auto=format&fit=crop" data-transition="concave">
+            <div class="cinematic-card">
+                <h2>The Problem</h2>
+                <ul>
+                    <li class="fragment fade-in"><i class="fas fa-times-circle"></i> Excessive **content choices** causing paralysis</li>
+                    <li class="fragment fade-in"><i class="fas fa-user-slash"></i> Lack of **deep personalization** in existing tools</li>
+                    <li class="fragment fade-in"><i class="fas fa-clock"></i> **Time wasted** in endless search loops</li>
+                    <li class="fragment fade-in"><i class="fas fa-users"></i> **Generic recommendations** (The "One Size Fits All" issue)</li>
+                </ul>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - Specifically, the problems are: Too much choice, Lack of true personalization, and Wasted time.
+                - We need to move away from generic "Top 10" lists to tailored experiences.
+            </aside>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1920&auto=format&fit=crop" data-transition="zoom">
+            <div class="cinematic-card">
+                <h2>Our Solution</h2>
+                <ul>
+                    <li class="fragment fade-in"><i class="fas fa-brain"></i> **Intelligent ML-based** recommendation engine</li>
+                    <li class="fragment fade-in"><i class="fas fa-star"></i> **Personalized suggestions** analyzing specific metadata</li>
+                    <li class="fragment fade-in"><i class="fas fa-sync-alt"></i> **Real-time improvement** based on continuous user input</li>
+                    <li class="fragment fade-in"><i class="fas fa-mobile-alt"></i> A **seamless, immersive UI/UX** experience</li>
+                </ul>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - We propose an intelligent application powered by Machine Learning.
+                - It doesn't just list movies; it understands the 'Why' behind a user's taste.
+                - It wraps complex logic in a beautiful, easy-to-use interface.
+            </aside>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?q=80&w=1920&auto=format&fit=crop" data-transition="fade">
+            <div class="cinematic-card">
+                <h2>System Types</h2>
+                <ul>
+                    <li class="fragment fade-in"><i class="fas fa-film"></i> **Content-Based Filtering:** "**You liked X, here is more of X**" (Our Focus)</li>
+                    <li class="fragment fade-in"><i class="fas fa-people-arrows"></i> **Collaborative Filtering:** "**Users like you also liked Y**"</li>
+                    <li class="fragment fade-in"><i class="fas fa-infinity"></i> **Hybrid Approaches:** **Combining both** for maximum accuracy</li>
+                </ul>
+                <p style="margin-top: 20px; color: var(--gold-accent);">***This app utilizes Content-Based Filtering via Cosine Similarity***</p>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - Explain the three main types.
+                - We are focusing on Content-Based to resolve the "**Cold Start**" problem for new users who haven't rated many movies yet.
+            </aside>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=1920&auto=format&fit=crop" data-transition="slide">
+            <div class="cinematic-card">
+                <h2>Tech Stack</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <ul>
+                        <li class="fragment fade-in-then-out"><i class="fas fa-code"></i> **ML Core:** Python, Scikit-Learn</li>
+                        <li class="fragment fade-in-then-out"><i class="fas fa-table"></i> **Data:** Pandas, NumPy (for manipulation)</li>
+                        <li class="fragment fade-in-then-out"><i class="fas fa-database"></i> **Dataset:** TMDB 5000 / MovieLens</li>
+                    </ul>
+                    <ul>
+                        <li class="fragment fade-in-then-out"><i class="fas fa-server"></i> **Backend:** Python Flask/Django</li>
+                        <li class="fragment fade-in-then-out"><i class="fas fa-laptop-code"></i> **Frontend:** React / Flutter (UI)</li>
+                        <li class="fragment fade-in-then-out"><i class="fas fa-cloud"></i> **Deployment:** Heroku / Render / AWS</li>
+                    </ul>
+                </div>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - Our technology stack is robust and modern.
+                - Python is the brain, Scikit-learn handles the math.
+                - A lightweight frontend ensures the user experience remains smooth across devices.
+            </aside>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=1920&auto=format&fit=crop" data-transition="none">
+            <div class="cinematic-card">
+                <h2>The Dataset</h2>
+                <ul>
+                    <li class="fragment fade-in"><i class="fas fa-scroll"></i> **Volume:** 5000+ Movies, rich metadata</li>
+                    <li class="fragment fade-in"><i class="fas fa-clipboard-list"></i> **Features:** Genres, Keywords, Cast, Director, Overview</li>
+                    <li class="fragment fade-in"><i class="fas fa-broom"></i> **Preprocessing:** Null value handling and JSON parsing</li>
+                    <li class="fragment fade-in"><i class="fas fa-dna"></i> **Feature Engineering:** Combining Cast, Director, and Genres into "**Tags**"</li>
+                </ul>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - Data is the fuel for our ML engine. We use TMDB for its rich content details.
+                - Crucial Step: Feature Engineering—we merge all text fields into a single 'soup' to accurately capture the movie's identity.
+            </aside>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1920&auto=format&fit=crop" data-transition="cube">
+            <div class="cinematic-card center-text">
+                <h2>Architecture Flow</h2>
+                <div class="flow-chart fragment custom" data-fragment-index="1">
+                    <div class="flow-box">User<br>Input</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box">Vector<br>Engine</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box">Similarity<br>Matrix</div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-box">Top 5<br>Output</div>
+                </div>
+                <br>
+                <ul>
+                    <li class="fragment fade-in"><i class="fas fa-code-branch"></i> **Modular Architecture** for scalability and maintenance</li>
+                    <li class="fragment fade-in"><i class="fas fa-hourglass-half"></i> **Real-time query** processing is prioritized</li>
+                </ul>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - Walk through the flow: Input, Vectorization (converting text to numbers), Similarity Check, Output.
+                - The entire process is designed to be highly responsive.
+            </aside>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1920&auto=format&fit=crop" data-transition="slide-out fade-in">
+            <div class="cinematic-card">
+                <h2>The ML Model</h2>
+                <ul>
+                    <li class="fragment fade-in"><i class="fas fa-text-width"></i> **Vectorization:** Bag of Words (CountVectorizer)</li>
+                    <li class="fragment fade-in"><i class="fas fa-sort-alpha-up"></i> **Dimension Reduction:** Stop-word removal (e.g., 'the', 'a')</li>
+                    <li class="fragment fade-in"><i class="fas fa-ruler-combined"></i> **Metric:** Cosine Similarity (measuring angle, not distance)</li>
+                    <li class="fragment fade-in"><i class="fas fa-calculator"></i> **Logic:** Calculating the angular proximity between movie vectors</li>
+                </ul>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - We convert textual tags into numbers using CountVectorizer.
+                - **Cosine Similarity** is preferred because in high-dimensional space, the angle between vectors is a better measure of similarity than the straight-line distance.
+            </aside>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1512070800540-0d4192faa0b5?q=80&w=1920&auto=format&fit=crop" data-transition="slide">
+            <div class="cinematic-card">
+                <h2>Key Features</h2>
+                <ul>
+                    <li class="fragment fade-in"><i class="fas fa-user-tag"></i> **Instant Personalized** Suggestions</li>
+                    <li class="fragment fade-in"><i class="fas fa-chart-line"></i> "**Trending Now**" Dashboard for popular titles</li>
+                    <li class="fragment fade-in"><i class="fas fa-list-alt"></i> User **Watchlist & Favorites** saving functionality</li>
+                    <li class="fragment fade-in"><i class="fas fa-layer-group"></i> **Advanced Genre** and Actor-based Filtering</li>
+                    <li class="fragment fade-in"><i class="fas fa-comment-dots"></i> User **Feedback Loop** for continuous model learning</li>
+                </ul>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - The features focus on usability and continuous learning.
+                - The Watchlist is a key retention feature.
+                - The feedback loop (user ratings/dislikes) helps the model learn and correct itself over time.
+            </aside>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1920&auto=format&fit=crop" data-transition="zoom">
+            <div class="cinematic-card">
+                <h2>UI/UX Vision</h2>
+                <ul>
+                    <li class="fragment fade-in"><i class="fas fa-moon"></i> **Theme:** Cinematic **Dark Mode** (OLED Black)</li>
+                    <li class="fragment fade-in"><i class="fas fa-grip-horizontal"></i> **Layout:** Modern **Card Grids** focusing on movie poster art</li>
+                    <li class="fragment fade-in"><i class="fas fa-exchange-alt"></i> **Transitions:** Smooth, non-intrusive animations</li>
+                    <li class="fragment fade-in"><i class="fas fa-sort-numeric-up-alt"></i> **Hierarchy:** Clear visual focus on cover art and rating scores</li>
+                </ul>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - The design is inspired by high-end streaming services.
+                - Dark mode reduces eye strain.
+                - The UI serves to frame the content, making movie poster art the main visual element.
+            </aside>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1549490214-d0834354b38d?q=80&w=1920&auto=format&fit=crop" data-transition="none">
+            <div class="cinematic-card">
+                <h2>Future Scope</h2>
+                <ul>
+                    <li class="fragment fade-in"><i class="fas fa-sitemap"></i> **Deep Learning** (Neural Collaborative Filtering) for better accuracy</li>
+                    <li class="fragment fade-in"><i class="fas fa-comment-alt"></i> **Real-time Sentiment Analysis** of user reviews</li>
+                    <li class="fragment fade-in"><i class="fas fa-robot"></i> **AI Chatbot** for complex, conversational movie queries</li>
+                    <li class="fragment fade-in"><i class="fas fa-globe"></i> **Cross-Platform Syncing** and Multi-lingual support</li>
+                </ul>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - We are looking ahead to future growth.
+                - Deep Learning will move the model beyond linear relationships.
+                - The AI Chatbot will be a game-changer for discovery: "Find me a sci-fi movie with a strong female lead."
+            </aside>
+        </section>
+
+        <section data-background-image="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1920&auto=format&fit=crop" data-transition="fade">
+            <div class="cinematic-card center-text" style="border:none; background: rgba(0,0,0,0.7);">
+                <h2>Summary</h2>
+                <ul>
+                    <li class="fragment fade-in"><i class="fas fa-magic"></i> **ML transforms** how we discover entertainment</li>
+                    <li class="fragment fade-in"><i class="fas fa-heart"></i> **Personalization** is the key to user satisfaction and retention</li>
+                    <li class="fragment fade-in"><i class="fas fa-balance-scale"></i> This system bridges the gap between **data logic and human emotion**</li>
+                </ul>
+                <h3 style="margin-top: 40px; color: var(--gold-accent);" class="fragment grow">Thank You</h3>
+            </div>
+            <aside class="notes">
+                Speaker Notes:
+                - To summarize: ML helps us find the needle in the haystack.
+                - It enhances the entertainment experience, making it personal and effortless.
+                - Thank you for your time. I am now open for questions.
+            </aside>
+        </section>
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+<script>
+    Reveal.initialize({
+        hash: true,
+        // Global default transitions
+        transition: 'slide', 
+        backgroundTransition: 'fade',
+        controls: true,
+        progress: true,
+        center: true,
+        // Global auto-slide timer set to 750 milliseconds (0.75 seconds)
+        autoSlide: 750, 
+        // Animations setup
+        fragments: true,
+    });
+</script>
+</body>
+</html>
