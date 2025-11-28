@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Movie Recommendation System</title>
+    <title>Cinematic Movie Recommendation System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
@@ -124,7 +124,7 @@
             margin-top: 40px;
             padding: 20px;
             border-top: 2px solid var(--gold-accent);
-            background: rgba(0,0,0,0.5);
+            background: rgba(0,0,0,0.7);
             border-radius: 5px;
         }
         .group-member {
@@ -149,10 +149,14 @@
 </head>
 
 <body>
-<div class="reveal">
+    <audio id="bg-music" loop preload="auto" muted style="display: none;">
+        <source src="cinematic_loop.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="reveal">
     <div class="slides">
 
-        <section data-background-image="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1920&auto=format&fit=crop" data-background-opacity="0.9" data-transition="zoom">
+        <section data-background-image="gustavo-alejandro-espinosa-reyes-_GFCuPOykec-unsplash.jpg" data-background-opacity="0.9" data-transition="zoom">
             <div class="cinematic-card center-text" style="border: none; background: rgba(0,0,0,0.7);">
                 
                 <h2 class="fragment fade-in" data-fragment-index="1" style="color: var(--soft-white); border: none;">MINI PROJECT</h2>
@@ -181,7 +185,7 @@
                     <p class="submission-text guide-name fragment fade-in" data-fragment-index="9" style="margin-top: 30px;">Guide: **MS. PALLAVI**</p>
 
                     <p class="submission-text institute-name fragment fade-in" data-fragment-index="10">
-                        ACCURATE INSTITUTE OF MANAGEMENT AND TECHNOLOGY
+                        ACCURATE INSTITUE OF MANAGEMENT AND TECHNOLOGY
                     </p>
                 </div>
             </div>
@@ -207,8 +211,8 @@
             </aside>
         </section>
 
-        <section data-background-image="https://images.unsplash.com/photo-1516259771146-5b77c5770517?q=80&w=1920&auto=format&fit=crop" data-transition="slide">
-            <div class="cinematic-card">
+        <section data-background-image="samuel-regan-asante-Geepgu8bCas-unsplash.jpg" data-transition="slide">
+            <div class="cinematic-card" style="background: rgba(0,0,0,0.7);">
                 <h2>Introduction</h2>
                 <ul>
                     <li class="fragment fade-in"><i class="fas fa-filter"></i> **Concept:** Algorithms filtering data to predict user preference</li>
@@ -224,8 +228,8 @@
             </aside>
         </section>
 
-        <section data-background-image="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?q=80&w=1920&auto=format&fit=crop" data-transition="convex">
-            <div class="cinematic-card">
+        <section data-background-image="hongwei-fan-A44uDEvjrHA-unsplash.jpg" data-transition="convex">
+            <div class="cinematic-card" style="background: rgba(0,0,0,0.7);">
                 <h2>The Need</h2>
                 <ul>
                     <li class="fragment fade-in"><i class="fas fa-search-minus"></i> Users struggle to find the "**Right Movie**" quickly</li>
@@ -241,8 +245,8 @@
             </aside>
         </section>
 
-        <section data-background-image="https://images.unsplash.com/photo-1508921912186-1d1a45db9284?q=80&w=1920&auto=format&fit=crop" data-transition="concave">
-            <div class="cinematic-card">
+        <section data-background-image="a6202bb7fd8cea7886e0fb0c6709c5f8.jpg" data-transition="concave">
+            <div class="cinematic-card" style="background: rgba(0,0,0,0.7);">
                 <h2>The Problem</h2>
                 <ul>
                     <li class="fragment fade-in"><i class="fas fa-times-circle"></i> Excessive **content choices** causing paralysis</li>
@@ -259,7 +263,7 @@
         </section>
 
         <section data-background-image="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1920&auto=format&fit=crop" data-transition="zoom">
-            <div class="cinematic-card">
+            <div class="cinematic-card" style="background: rgba(0,0,0,0.7);">
                 <h2>Our Solution</h2>
                 <ul>
                     <li class="fragment fade-in"><i class="fas fa-brain"></i> **Intelligent ML-based** recommendation engine</li>
@@ -277,7 +281,7 @@
         </section>
 
         <section data-background-image="https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?q=80&w=1920&auto=format&fit=crop" data-transition="fade">
-            <div class="cinematic-card">
+            <div class="cinematic-card" style="background: rgba(0,0,0,0.7);">
                 <h2>System Types</h2>
                 <ul>
                     <li class="fragment fade-in"><i class="fas fa-film"></i> **Content-Based Filtering:** "**You liked X, here is more of X**" (Our Focus)</li>
@@ -294,7 +298,7 @@
         </section>
 
         <section data-background-image="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=1920&auto=format&fit=crop" data-transition="slide">
-            <div class="cinematic-card">
+            <div class="cinematic-card" style="background: rgba(0,0,0,0.7);">
                 <h2>Tech Stack</h2>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <ul>
@@ -318,7 +322,7 @@
         </section>
 
         <section data-background-image="https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=1920&auto=format&fit=crop" data-transition="none">
-            <div class="cinematic-card">
+            <div class="cinematic-card" style="background: rgba(0,0,0,0.7);">
                 <h2>The Dataset</h2>
                 <ul>
                     <li class="fragment fade-in"><i class="fas fa-scroll"></i> **Volume:** 5000+ Movies, rich metadata</li>
@@ -335,7 +339,7 @@
         </section>
 
         <section data-background-image="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1920&auto=format&fit=crop" data-transition="cube">
-            <div class="cinematic-card center-text">
+            <div class="cinematic-card center-text" style="background: rgba(0,0,0,0.7);">
                 <h2>Architecture Flow</h2>
                 <div class="flow-chart fragment custom" data-fragment-index="1">
                     <div class="flow-box">User<br>Input</div>
@@ -360,7 +364,7 @@
         </section>
 
         <section data-background-image="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1920&auto=format&fit=crop" data-transition="slide-out fade-in">
-            <div class="cinematic-card">
+            <div class="cinematic-card" style="background: rgba(0,0,0,0.7);">
                 <h2>The ML Model</h2>
                 <ul>
                     <li class="fragment fade-in"><i class="fas fa-text-width"></i> **Vectorization:** Bag of Words (CountVectorizer)</li>
@@ -376,8 +380,8 @@
             </aside>
         </section>
 
-        <section data-background-image="https://images.unsplash.com/photo-1512070800540-0d4192faa0b5?q=80&w=1920&auto=format&fit=crop" data-transition="slide">
-            <div class="cinematic-card">
+        <section data-background-image="cf0225ae4219f6958c272722c30e8e96.jpg" data-transition="slide">
+            <div class="cinematic-card" style="background: rgba(0,0,0,0.7);">
                 <h2>Key Features</h2>
                 <ul>
                     <li class="fragment fade-in"><i class="fas fa-user-tag"></i> **Instant Personalized** Suggestions</li>
@@ -396,7 +400,7 @@
         </section>
 
         <section data-background-image="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1920&auto=format&fit=crop" data-transition="zoom">
-            <div class="cinematic-card">
+            <div class="cinematic-card" style="background: rgba(0,0,0,0.7);">
                 <h2>UI/UX Vision</h2>
                 <ul>
                     <li class="fragment fade-in"><i class="fas fa-moon"></i> **Theme:** Cinematic **Dark Mode** (OLED Black)</li>
@@ -413,8 +417,8 @@
             </aside>
         </section>
 
-        <section data-background-image="https://images.unsplash.com/photo-1549490214-d0834354b38d?q=80&w=1920&auto=format&fit=crop" data-transition="none">
-            <div class="cinematic-card">
+        <section data-background-image="ximin-lin-VH91biVOmEU-unsplash.jpg" data-transition="none">
+            <div class="cinematic-card" style="background: rgba(0,0,0,0.7);">
                 <h2>Future Scope</h2>
                 <ul>
                     <li class="fragment fade-in"><i class="fas fa-sitemap"></i> **Deep Learning** (Neural Collaborative Filtering) for better accuracy</li>
@@ -431,7 +435,7 @@
             </aside>
         </section>
 
-        <section data-background-image="https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1920&auto=format&fit=crop" data-transition="fade">
+        <section data-background-image="sidharth-kumar-9SDgek2e7Bs-unsplash.jpg" data-transition="fade">
             <div class="cinematic-card center-text" style="border:none; background: rgba(0,0,0,0.7);">
                 <h2>Summary</h2>
                 <ul>
@@ -454,6 +458,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
 <script>
+    // 1. Get the Audio Element
+    const bgMusic = document.getElementById('bg-music');
+
     Reveal.initialize({
         hash: true,
         // Global default transitions
@@ -466,6 +473,24 @@
         autoSlide: 750, 
         // Animations setup
         fragments: true,
+
+        // 2. Set up event handler to start music after the first user interaction
+        ready: function(event) {
+            // Find the presentation container
+            const deck = document.querySelector('.reveal');
+            
+            // Add a one-time click listener to start the music
+            deck.addEventListener('click', function startAudio() {
+                if (bgMusic) {
+                    // Start playback, using .catch() to handle potential autoplay blocks
+                    bgMusic.play().catch(error => {
+                        console.log('Autoplay blocked. User needs to click again to start music:', error);
+                    });
+                    // Remove the listener after the first successful attempt to avoid running it multiple times
+                    deck.removeEventListener('click', startAudio);
+                }
+            }, { once: true });
+        }
     });
 </script>
 </body>
